@@ -1,0 +1,35 @@
+class Game {
+  final String title;
+  late String highScore; // TODO 1: set in loadSaveData()
+  late List<String> players; // TODO 2: also set in loadSaveData()
+
+  Game(this.title);
+  bool loaded = false;
+  void loadSaveData() {
+    highScore = '9999';
+    players = ['Alice', 'Bob'];
+    loaded = true;
+  }
+
+  // TODO 3: Add a boolean flag _loaded that starts false and becomes true
+  // in loadSaveData(). Check it in showSummary().
+
+  void showSummary() {
+    // Initialize the flag to false
+
+    if (loaded == true) {
+      // Crash-safe: only access late fields if data is loaded
+      print('$title — High score: $highScore');
+      print('Players: $players');
+    }else{
+      print('Data not loaded');
+    }
+  }
+}
+
+void main() {
+  Game g = Game('Pac-Man');
+  g.showSummary();
+  g.loadSaveData();
+  g.showSummary(); // TODO 4: Fix — this is called BEFORE loadSaveData()
+}
